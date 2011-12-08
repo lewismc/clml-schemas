@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:ukm="http://www.legislation.gov.uk/namespaces/metadata" xmlns="http://www.legislation.gov.uk/namespaces/legislation" xmlns:ukl="http://www.legislation.gov.uk/namespaces/legislation" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.legislation.gov.uk/namespaces/legislation" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" id="schemaLegislationStrict">
+
+	<xsd:annotation>
+		<xsd:appinfo xmlns:dcq="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+			<dc:title>Legislation Schema (Strict)</dc:title>
+			<dc:description>Describes primary and secondary UK legislation (Strict version)</dc:description>
+			<dc:identifier>schemaLegislationStrict</dc:identifier>
+			<dc:language>en</dc:language>
+		</xsd:appinfo>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="schemaLegislationIncludes.xsd"/>
+	<xsd:import namespace="http://www.legislation.gov.uk/namespaces/metadata" schemaLocation="schemaLegislationMetadata.xsd"/>
+
+	<!--
+	========== Element Definitions ==========
+	-->
+
+	<xsd:element name="legislation">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ukm:Metadata" minOccurs="0"/>
+				<xsd:element ref="Contents" minOccurs="0"/>
+				<xsd:choice>
+					<xsd:element ref="Primary"/>
+					<xsd:element ref="Secondary"/>
+				</xsd:choice>
+				<xsd:element ref="Footnotes" minOccurs="0"/>
+				<xsd:element ref="MarginNotes" minOccurs="0"/>
+				<xsd:element ref="Versions" minOccurs="0"/>
+				<xsd:element ref="Resources" minOccurs="0"/>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="CommonAttributes"/>
+			<xsd:attribute name="SchemaVersion" type="xsd:NMTOKEN" use="required" fixed="1.0"/>
+		</xsd:complexType>
+		<xsd:keyref name="refSubReftoCitationRef" refer="keyCitationRef2">
+			<xsd:annotation>
+				<xsd:documentation>Ensures that the subreference has corresponding parent subreference or a reference</xsd:documentation>
+			</xsd:annotation>
+			<xsd:selector xpath=".//ukl:CitationSubRef"/>
+			<xsd:field xpath="@CitationRef"/>
+		</xsd:keyref>
+		<xsd:key name="keyCitationRef2">
+			<xsd:selector xpath=".//ukl:Citation | .//ukl:CitationSubRef"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:key name="keySubRef">
+			<xsd:selector xpath=".//ukl:CitationSubRef"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+	</xsd:element>
+	
+</xsd:schema>

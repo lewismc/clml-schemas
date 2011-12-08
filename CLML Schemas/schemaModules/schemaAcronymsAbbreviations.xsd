@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" id="SchemaAcronymsAbbreviations">
+
+	<xsd:annotation>
+		<xsd:appinfo xmlns:dcq="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+			<dc:title>Acronyms and Abbreviations Schema</dc:title>
+			<dc:description>Defines acronyms and abbreviations</dc:description>
+			<dc:identifier>SchemaAcronymsAbbreviations</dc:identifier>
+			<dc:language>en</dc:language>
+		</xsd:appinfo>
+	</xsd:annotation>
+
+	<xsd:element name="Acronym">
+		<xsd:annotation>
+			<xsd:documentation>Defines an acronym and its expansion</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:element ref="Character"/>
+				<xsd:group ref="EmphasisBasic"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="CommonAttributes"/>			
+			<xsd:attribute name="Expansion" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="Abbreviation">
+		<xsd:annotation>
+			<xsd:documentation>Defines an abbreviation and its expansion</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:element ref="Character"/>
+				<xsd:group ref="EmphasisBasic"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="CommonAttributes"/>			
+			<xsd:attribute name="Expansion" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>

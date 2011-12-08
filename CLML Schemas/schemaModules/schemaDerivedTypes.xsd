@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" id="SchemaDerivedTypes">
+
+	<xsd:annotation>
+		<xsd:appinfo xmlns:dcq="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+			<dc:title>Standard Schema Derived Types</dc:title>
+			<dc:description>A set of generic derived schema types</dc:description>
+			<dc:identifier>SchemaDerivedTypes</dc:identifier>
+			<dc:language>en</dc:language>
+		</xsd:appinfo>
+	</xsd:annotation>
+
+	<xsd:simpleType name="YesNoType">
+		<xsd:annotation>
+			<xsd:documentation>A yes/no option</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="yes"/>
+			<xsd:enumeration value="no"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="BasicStringStructure" mixed="true">
+		<xsd:annotation>
+			<xsd:documentation>A string optionally allowing character element to be used</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element ref="Character"/>
+		</xsd:choice>
+	</xsd:complexType>
+
+</xsd:schema>

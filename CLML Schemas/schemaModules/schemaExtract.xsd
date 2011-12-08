@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" id="SchemaExtract">
+
+	<xsd:annotation>
+		<xsd:appinfo xmlns:dcq="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+			<dc:title>Extracts of text Schema</dc:title>
+			<dc:description>Defines extracts of text</dc:description>
+			<dc:identifier>SchemaExtract</dc:identifier>
+			<dc:language>en</dc:language>
+		</xsd:appinfo>
+	</xsd:annotation>
+
+	<xsd:element name="BlockExtract" type="BlockExtractStructure"/>
+	<xsd:element name="InlineExtract" type="InlineExtractStructure"/>
+
+</xsd:schema>

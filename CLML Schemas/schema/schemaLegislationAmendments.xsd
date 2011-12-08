@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.legislation.gov.uk/namespaces/legislation" xmlns="http://www.legislation.gov.uk/namespaces/legislation" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xhtml="http://www.w3.org/1999/xhtml" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" id="SchemaLegislationAmendments">
+
+	<xsd:annotation>
+		<xsd:appinfo xmlns:dcq="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+			<dc:title>Legislation Amendments Schema</dc:title>
+			<dc:description>Defines amendments</dc:description>
+			<dc:identifier>SchemaLegislationAmendments</dc:identifier>
+			<dc:language>en</dc:language>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:import namespace="http://www.w3.org/1999/xhtml" schemaLocation="../schemaModules/schemaTable-XHTML.xsd"/>
+	
+	<xsd:element name="BlockAmendment">
+		<xsd:annotation>
+			<xsd:documentation>Describes an amendment to the text</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element ref="PrimaryPreamble"/>
+					<xsd:element ref="SecondaryPreamble"/>
+					<xsd:element ref="Text"/>
+					<xsd:element ref="Body"/>
+					<xsd:element ref="Group"/>
+					<xsd:element ref="Part"/>
+					<xsd:element ref="Chapter"/>
+					<xsd:element ref="Pblock"/>
+					<xsd:element ref="PsubBlock"/>
+					<xsd:element ref="Para"/>
+					<xsd:element ref="P1"/>
+					<xsd:element ref="P2"/>
+					<xsd:element ref="P3"/>
+					<xsd:element ref="P4"/>
+					<xsd:element ref="P5"/>
+					<xsd:element ref="P6"/>
+					<xsd:element ref="P7"/>
+					<xsd:element ref="P1para"/>
+					<xsd:element ref="P2para"/>
+					<xsd:element ref="P3para"/>
+					<xsd:element ref="P4para"/>
+					<xsd:element ref="P5para"/>
+					<xsd:element ref="P6para"/>
+					<xsd:element ref="P7para"/>
+					<xsd:element ref="P1group"/>
+					<xsd:element ref="P2group"/>
+					<xsd:element ref="P3group"/>
+					<xsd:element ref="Schedules"/>
+					<xsd:element ref="Schedule"/>
+					<xsd:sequence>
+						<xsd:element ref="BlockAmendment"/>
+						<xsd:element ref="AppendText" minOccurs="0"/>
+					</xsd:sequence>
+					<xsd:element ref="xhtml:table"/>
+					<xsd:element ref="Contents"/>
+					<xsd:element ref="ContentsPart"/>
+					<xsd:element ref="ContentsChapter"/>
+					<xsd:element ref="ContentsPblock"/>
+					<xsd:element ref="ContentsPsubBlock"/>
+					<xsd:element ref="ContentsItem"/>
+					<xsd:element ref="ContentsSubItem"/>
+					<xsd:element ref="ContentsSchedules"/>
+					<xsd:element ref="ContentsSchedule"/>
+					<xsd:element ref="ContentsAppendix"/>
+					<xsd:group ref="BlockBasic"/>
+					<xsd:element ref="FragmentNumber"/>
+					<xsd:element ref="FragmentTitle"/>
+				</xsd:choice>
+				<xsd:element ref="IncludedDocument"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="LegislationAmendmentAttributes"/>
+			<xsd:attributeGroup ref="QuotesAttributes"/>
+			<xsd:attributeGroup ref="CommonAttributes"/>
+			<xsd:attributeGroup ref="StructureNumberFormattingAttributes"/>
+			<xsd:attribute name="PartialRefs" type="xsd:IDREFS"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="FragmentNumber">
+		<xsd:annotation>
+			<xsd:documentation>Allows for an amendment to a number element, e.g. for a Part</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Number"/>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="CommonAttributes"/>
+			<xsd:attribute name="Context" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="Group"/>
+						<xsd:enumeration value="Part"/>
+						<xsd:enumeration value="Chapter"/>
+						<xsd:enumeration value="Pblock"/>
+						<xsd:enumeration value="PsubBlock"/>
+						<xsd:enumeration value="Schedule"/>
+						<xsd:enumeration value="Footnote"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="FragmentTitle">
+		<xsd:annotation>
+			<xsd:documentation>Allows for an amendment to a title element, e.g. for a P1group</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Title"/>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="CommonAttributes"/>
+			<xsd:attribute name="Context" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="P1group"/>
+						<xsd:enumeration value="P2group"/>
+						<xsd:enumeration value="P3group"/>
+						<xsd:enumeration value="Group"/>
+						<xsd:enumeration value="Part"/>
+						<xsd:enumeration value="Chapter"/>
+						<xsd:enumeration value="Pblock"/>
+						<xsd:enumeration value="PsubBlock"/>
+						<xsd:enumeration value="Schedule"/>
+						<xsd:enumeration value="Figure"/>
+						<xsd:enumeration value="Tabular"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	
+</xsd:schema>

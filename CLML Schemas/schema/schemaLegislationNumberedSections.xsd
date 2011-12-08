@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.legislation.gov.uk/namespaces/legislation" targetNamespace="http://www.legislation.gov.uk/namespaces/legislation" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" id="SchemaNumberedSections">
+
+	<xsd:annotation>
+		<xsd:appinfo xmlns:dcq="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+			<dc:title>Schema Section Level Structure</dc:title>
+			<dc:description>Defines the medium-level structures that are containers for content</dc:description>
+			<dc:identifier>SchemaNumberedSections</dc:identifier>
+			<dc:language>en</dc:language>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:element name="P1group">
+		<xsd:annotation>
+			<xsd:documentation>Groups together provisions or paragraphs that have a common title</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Title"/>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element ref="P1"/>
+					<xsd:element ref="P"/>
+				</xsd:choice>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="CommonSubAttributes"/>
+			<xsd:attributeGroup ref="PelementIDattributes"/>
+			<xsd:attributeGroup ref="LayoutAttributes"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:attributeGroup name="PelementIDattributes">
+		<xsd:attribute name="id">
+			<xsd:annotation>
+				<xsd:documentation>A unique identifier in the format p00000</xsd:documentation>
+			</xsd:annotation>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:ID">
+					<xsd:pattern value="p[0-9]{5}"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+	
+	<xsd:element name="P1">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Pnumber"/>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element ref="P1para"/>
+					<xsd:group ref="BlockSection"/>
+				</xsd:choice>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="CommonSubAttributes"/>
+			<xsd:attributeGroup ref="PelementIDattributes"/>
+			<xsd:attribute name="FootnoteRef" type="xsd:IDREFS">
+				<xsd:annotation>
+					<xsd:documentation>Allows for the very rare occurrence where a section number has a footnote cross-reference</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:simpleType name="SectionNo">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+		 </xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:element name="Pnumber">
+		<xsd:annotation>
+			<xsd:documentation>Contains a provision number. Only the number should be stored as content. Punctuation is implied but if non-standard the puncbefore/after attributes should be used</xsd:documentation>
+		</xsd:annotation>	
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="SectionNo">
+					<xsd:attribute name="PuncBefore" type="xsd:string"/>
+					<xsd:attribute name="PuncAfter" type="xsd:string"/>
+					<xsd:attributeGroup ref="CommonAttributes"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="P1para">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:group ref="InlineModel"/>
+				<xsd:element ref="P2"/>
+				<xsd:element ref="P3"/>
+				<xsd:element ref="P4"/>
+				<xsd:element ref="P2group"/>
+				<xsd:element ref="P3group"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="CommonAttributes"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="P2group">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Title"/>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element ref="P2"/>
+					<xsd:element ref="P2para"/>
+				</xsd:choice>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="CommonSubAttributes"/>
+			<xsd:attributeGroup ref="PelementIDattributes"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="P2">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Pnumber"/>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element ref="P2para"/>
+					<xsd:group ref="BlockSection"/>
+				</xsd:choice>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="CommonSubAttributes"/>
+			<xsd:attributeGroup ref="PelementIDattributes"/>
+			<xsd:attribute name="FootnoteRef" type="xsd:IDREFS">
+				<xsd:annotation>
+					<xsd:documentation>Allows for the very rare occurrence where a section number has a footnote cross-reference</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="P2para">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:group ref="InlineModel"/>
+				<xsd:element ref="P3"/>
+				<xsd:element ref="P4"/>
+				<xsd:element ref="P5"/>
+				<xsd:element ref="P3group"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="CommonAttributes"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="P3group">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Title"/>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element ref="P3"/>
+					<xsd:element ref="P4"/>
+					<xsd:element ref="P3para"/>
+				</xsd:choice>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="CommonSubAttributes"/>
+			<xsd:attributeGroup ref="PelementIDattributes"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="P3">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Pnumber"/>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element ref="P3para"/>
+					<xsd:group ref="BlockSection"/>
+				</xsd:choice>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="CommonSubAttributes"/>
+			<xsd:attributeGroup ref="PelementIDattributes"/>
+			<xsd:attribute name="FootnoteRef" type="xsd:IDREFS">
+				<xsd:annotation>
+					<xsd:documentation>Allows for the very rare occurrence where a section number has a footnote cross-reference</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="P3para">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:group ref="InlineModel"/>
+				<xsd:element ref="P4"/>
+				<xsd:element ref="P5"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="CommonAttributes"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="P4">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Pnumber"/>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element ref="P4para"/>
+					<xsd:group ref="BlockSection"/>
+				</xsd:choice>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="CommonSubAttributes"/>
+			<xsd:attributeGroup ref="PelementIDattributes"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="P4para">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:group ref="InlineModel"/>
+				<xsd:element ref="P5"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="CommonAttributes"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="P5">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Pnumber"/>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element ref="P5para"/>
+					<xsd:group ref="BlockSection"/>
+				</xsd:choice>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="CommonSubAttributes"/>
+			<xsd:attributeGroup ref="PelementIDattributes"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="P5para">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:group ref="InlineModel"/>
+				<xsd:element ref="P6"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="CommonAttributes"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="P6">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Pnumber"/>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element ref="P6para"/>
+					<xsd:group ref="BlockSection"/>
+				</xsd:choice>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="CommonSubAttributes"/>
+			<xsd:attributeGroup ref="PelementIDattributes"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="P6para">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:group ref="InlineModel"/>
+				<xsd:element ref="P7"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="CommonAttributes"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="P7">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Pnumber"/>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element ref="P7para"/>
+					<xsd:group ref="BlockSection"/>
+				</xsd:choice>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="CommonSubAttributes"/>
+			<xsd:attributeGroup ref="PelementIDattributes"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="P7para">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:group ref="InlineModel"/>
+			</xsd:choice>
+			<xsd:attributeGroup ref="CommonAttributes"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="P">
+		<xsd:annotation>
+			<xsd:documentation>An unnumbered provision/paragraph</xsd:documentation>
+			<xsd:documentation>The model forces text before structure to avoid e.g. P1 straight inside a P</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:choice>
+					<xsd:group ref="InlineModel"/>
+				</xsd:choice>
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+					<xsd:group ref="InlineModel"/>
+					<xsd:element ref="P1"/>
+					<xsd:element ref="P2group"/>
+					<xsd:element ref="P2"/>
+					<xsd:element ref="P3group"/>
+					<xsd:element ref="P3"/>
+					<xsd:element ref="P4"/>
+				</xsd:choice>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="CommonSubAttributes"/>
+			<xsd:attributeGroup ref="PelementIDattributes"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+</xsd:schema>
